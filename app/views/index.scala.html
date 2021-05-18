@@ -1,0 +1,36 @@
+@import models._
+@(todo: List[Todo], todoForm: Form[String])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@import helper._
+
+@main("Hello") {
+    <section id="content">
+        <div class="wrapper doc">
+            <article>
+                <h1>Todo List <span class="count">@todo.size todos here!</span></h1>
+                <ul class="todo-wrap">
+                @todo.map { todo =>
+                    <li class="todo-single">
+                        <h3>@todo.label</h3>
+                        <div>
+                            @form(CSRF(routes.HomeController.modifyTodo(todo.id))) {
+                                @inputText(todoForm("label"))
+                                <input type="submit" value="Edit">
+                                }
+                        </div>
+                        <div>
+                            @form(CSRF(routes.HomeController.deleteTodo(todo.id))) {
+                                <input type="submit" value="Delete">
+                                }
+                        </div>
+                    </li>
+                }
+                </ul>
+                    @form(CSRF(routes.HomeController.newTodo())) {
+                        @inputText(todoForm("label"))
+                        <input type="submit" value="Create">
+                        }
+            </article>
+        </div>
+    </section>
+}
