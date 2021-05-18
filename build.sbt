@@ -1,7 +1,7 @@
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
-    name := """play-scala-forms-example""",
+    name := """play-todolist""",
     version := "2.2.x",
     scalaVersion := "2.13.5",
     libraryDependencies ++= Seq(
